@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}} - Galeria {% endblock %}
+
+{% block body %}
+{{parent()}}
+    <h1 class="text-center">Galeria</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Titulo</th>
+                <th>Descripcion</th>
+                <th>Imagen</th>
+                <th>OPCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publicacion in publicacions %}
+            <tr>
+                
+                <td>{{ publicacion.titulo }}</td>
+                <td>{{ publicacion.descripcion }}</td>
+                <td> <img src="{{ publicacion.imagen }}" alt="" width="100px" height="100px" /> </td>
+                <td>
+                    <a href="{{ path('publicacion_show', {'id': publicacion.id}) }}" class="btn btn-primary btn-lg active">Ver</a>
+                    <a href="{{ path('publicacion_edit', {'id': publicacion.id}) }}" class="btn btn-secondary btn-lg">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('publicacion_new') }}">Create new</a>
+{% endblock %}
